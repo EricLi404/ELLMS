@@ -1,0 +1,114 @@
+/** kit_admin-v1.1.0 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
+.kit-login-bg {
+    background-color: #393946
+}
+.kit-login-box {
+    width: 390px;
+    margin: 10% auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: #393946;
+}
+
+.kit-login-box header {
+    height: auto;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 150, 136, .5)
+}
+
+.kit-login-box header h1 {
+    text-align: center;
+    font-size: 25px;
+    line-height: 60px;
+}
+
+.kit-login-box .kit-login-main {
+    padding: 30px 50px 0
+}
+
+.kit-login-box .kit-login-main .layui-input:focus {
+    border-color:  #01AAED !important
+}
+
+.kit-login-box .kit-login-main .layui-input{
+    border:1px solid rgba(0,150,136,.5);
+}
+
+
+.kit-login-main .layui-form-item {
+    position: relative
+}
+
+/*输入框左侧的ico*/
+.kit-login-main .layui-form-item .kit-login-icon {
+    position: absolute;
+    color: #ccc;
+    top: 10px;
+    left: 10px
+}
+
+.kit-login-main .layui-form-item input {
+    padding-left: 34px
+}
+
+
+.kit-login-box footer p {
+    line-height: 65px;
+    text-align: center
+}
+
+.kit-pull-left {
+    float: left !important
+}
+
+.kit-pull-right {
+    float: right !important
+}
+
+
+.kit-login-remember {
+    line-height: 38px;
+}
+
+.layui-form-checkbox{
+    vertical-align: text-bottom !important;
+}
+
+.kit-login-remember .layui-form-checked[lay-skin=primary] i {
+    border-color: #01AAED;
+    background-color: #01AAED
+}
+
+.content {
+    position: relative;
+}
+
+
+#kit-login-input-captcha {
+    width: 48%;
+    float: left;
+    margin-right: 5px;
+    border: 1px solid rgba(0, 150, 136, .5);
+}
+
+.layui-btn:hover {
+    color: #ffffff!important;
+    background-color: #01AAED;
+    border:1px solid #01AAED;
+}
+
+.layui-btn{
+   border:1px solid rgba(0,150,136,.5);
+}
+
+.layui-input:hover {
+    border-color: #01AAED !important;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
+    border: 1px solid #01AAED !important;
+}
+
+.layui-form-checkbox[lay-skin=primary] i {
+    border: 1px solid #5FB878 !important;
+}

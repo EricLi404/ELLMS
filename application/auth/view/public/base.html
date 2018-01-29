@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <title>
+        {block name="title"}标题{/block}
+    </title>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    {block name="header"}头部{/block}
+    {block name="side"}左侧导航区域{/block}
+    {block name="body"}主体区域{/block}
+    {block name="footer"}底部{/block}
+
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','layer'], function(){
+        var element = layui.element;
+
+
+
+
+        var layer = layui.layer;
+        //监听导航点击
+        element.on('nav(test)', function(elem){
+            //console.log(elem)
+            element.tabAdd('test', {
+                title: '页面一'
+                ,content: 'page1.html' //支持传入html
+            });
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</body>
+</html>

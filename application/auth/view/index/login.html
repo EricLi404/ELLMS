@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>研究生实验室综合管理平台</title>
+    <script>
+        if (window !== window.top) top.location.href = self.location.href;
+    </script>
+    <link href="/static/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/static/css/login.css" rel="stylesheet"/>
+</head>
+
+
+<body class="kit-login-bg">
+<div class="container demo-4">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <div class="kit-login-box">
+                <header>
+                    <h1>研究生实验室综合管理平台</h1>
+                </header>
+                <div class="kit-login-main">
+                    <form class="layui-form" id="login">
+                        <div class="layui-form-item">
+                            <label class="kit-login-icon">
+                                <i class="layui-icon">&#xe612;</i>
+                            </label>
+                            <input type="text" name="name" lay-verify="username" autocomplete="off" placeholder="用户名"
+                                   class="layui-input" {notempty name="usermember" }value="{$usermember}" {/notempty} >
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="kit-login-icon">
+                                <i class="layui-icon">&#xe642;</i>
+                            </label>
+                            <input type="password" name="password" lay-verify="password" autocomplete="off"
+                                   placeholder="密码" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="kit-login-icon">
+                                <i class="layui-icon">&#xe642;</i>
+                            </label>
+                            <input type="text" name="captcha" lay-verify="captcha" autocomplete="off" placeholder="验证码"
+                                   class="layui-input" id="kit-login-input-captcha">
+                            <img src="{:captcha_src()}" alt="captcha"
+                                 onclick="this.src='{:captcha_src()}?seed='+Math.random()" height="37" id="captcha"/>
+                        </div>
+                        <div class="layui-form-item ">
+                            <div class="kit-pull-left kit-login-remember">
+                                <input type="checkbox" value="1" lay-skin="primary" title="记住帐号?" name="remember"
+                                       {notempty name="usermember" }checked="" {/notempty}>
+                            </div>
+                            <div class="kit-pull-right">
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 登录
+                                </button>
+                            </div>
+                            <div class="layui-clear"></div>
+                        </div>
+                        <!--{:token('__token__', 'sha1')}-->
+                    </form>
+                </div>
+                <footer>
+                    <p class="kit-footer-copyright">ELLMS © me@EricLi.top</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /container -->
+
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery,
+            form = layui.form;
+        form.verify({
+            username: [
+                /^[\w]{5,}$/
+                ,'用户名长度应该大于4位，且不能出现空格'
+            ]
+            ,password: [
+                /^[\S]{6,16}$/
+                ,'密码必须6到16位，且不能出现空格'
+            ]
+            ,captcha: [
+                /^[\w]{4}$/
+                ,'验证码长度应该为4位'
+            ]
+        });
+        $(window).on('load', function () {
+            form.on('submit(login)', function (data) {
+                 $.ajax({
+                     url: "",
+                     data: $('#login').serialize(),
+                     type: 'post',
+                     async: false,
+                     success: function (res) {
+                         layer.msg(res.msg, {offset: '100px', anim: 4});
+                         if (res.code == 1) {
+                             setTimeout(function () {
+                                 location.href = res.url;
+                             }, 1500);
+                         } else {
+                             $('#captcha').click();
+                         }
+                     }
+                 });
+                return false;
+            });
+        });
+
+    });
+</script>
+</body>
+
+</html>

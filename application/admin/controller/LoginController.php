@@ -32,7 +32,6 @@ class LoginController extends BaseController
         if ($this->request->isGet()) {
             return $this->fetch();
         } elseif ($this->request->isPost()) {
-            dump($this->request->post());
             $captcha = $this->request->post('captcha', '', 'trim');
             if(!captcha_check($captcha)){
                 $this->error('验证码错误，请重试');
@@ -55,14 +54,14 @@ class LoginController extends BaseController
                                 if (empty($user->status)) {
                                     $this->error('账号已被禁用，请联系管理员');
                                 } else {
-//                        登录成功,将登录记录写入数据库
+//                                    登录成功,将登录记录写入数据库
                                     $login_data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
                                     $user->login_at = date("Y-m-d H:i:s", time());
                                     $user->login_num += 1;
                                     $user->save();
-//                        写入session
+//                                    写入session
                                     Session::set('user', $user);
-//                        TODO 权限校验，写入log
+//                                    TODO 权限校验，写入log
                                     $this->success('登录成功，正在进入系统...', '/');
                                 }
                             }

@@ -23,7 +23,7 @@ class IndexController extends BaseController
 
     public function test()
     {
-
+//        echo $this->encryptionPassword('aaaaaa');
         return $this->fetch();;
     }
 

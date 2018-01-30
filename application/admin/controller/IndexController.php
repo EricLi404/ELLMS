@@ -1,4 +1,5 @@
 <?php
+
 namespace app\admin\controller;
 
 use controller\BaseController;
@@ -9,9 +10,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        echo "hello";
-        return 0;
-//        return $this->fetch();
+        return $this->fetch();
     }
 
 
@@ -20,4 +19,12 @@ class IndexController extends BaseController
         $captcha = new Captcha();
         return $captcha->entry();
     }
+
+
+    public function test()
+    {
+
+        return $this->fetch();;
+    }
+
 }

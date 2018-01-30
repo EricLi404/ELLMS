@@ -24,12 +24,12 @@
                     <h1>研究生实验室综合管理平台</h1>
                 </header>
                 <div class="kit-login-main">
-                    <form class="layui-form" id="login">
+                    <form class="layui-form" id="login" method="post">
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
                             </label>
-                            <input type="text" name="name" lay-verify="username" autocomplete="off" placeholder="用户名"
+                            <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="用户名"
                                    class="layui-input">
                         </div>
                         <div class="layui-form-item">
@@ -92,28 +92,14 @@
                 , '验证码长度应该为4位'
             ]
         });
+        $('#login').attr("action", "{:url('admin/login/index')}");
         form.on('submit(login)', function (data) {
-            console.log($('#login').serialize());
+            var formData = $('#login').serialize()
+            $('#login').submit();
+            console.log(formData);
             // layer.msg('正在登录。。。', {offset: '100px', anim: 4});
             layer.load(2, {time: 2*1000}); //又换了种风格，并且设定最长等待10秒
-            $.post();
-            $.ajax({
-                url: "{:url('auth/index/login')}",
-                data: $('#login').serialize(),
-                type: 'post',
-                async: false,
-                success: function (res) {
-                    console.log("success" + JSON.stringify(res));
-                    if (res.code == 1) {
-                        location.href = res.url;
-                    } else {
-                        $('#captcha').click();
-                    }
-                },
-                error: function (res) {
-                    console.log("error" + JSON.stringify(res));
-                }
-            });
+
             return false;
         });
     });

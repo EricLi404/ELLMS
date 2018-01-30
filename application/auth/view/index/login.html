@@ -29,29 +29,24 @@
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
                             </label>
-                            <input type="text" name="name" lay-verify="username" autocomplete="off" placeholder="用户名"
-                                   class="layui-input" {notempty name="usermember" }value="{$usermember}" {/notempty} >
+                            <input type="text" name="name" lay-verify="username" autocomplete="off" placeholder="用户名" class="layui-input" >
                         </div>
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe642;</i>
                             </label>
-                            <input type="password" name="password" lay-verify="password" autocomplete="off"
-                                   placeholder="密码" class="layui-input">
+                            <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="密码" class="layui-input">
                         </div>
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe642;</i>
                             </label>
-                            <input type="text" name="captcha" lay-verify="captcha" autocomplete="off" placeholder="验证码"
-                                   class="layui-input" id="kit-login-input-captcha">
-                            <img src="{:captcha_src()}" alt="captcha"
-                                 onclick="this.src='{:captcha_src()}?seed='+Math.random()" height="37" id="captcha"/>
+                            <input type="text" name="captcha" lay-verify="captcha" autocomplete="off" placeholder="验证码" class="layui-input" id="kit-login-input-captcha">
+                            <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()"  id="captcha"/>
                         </div>
                         <div class="layui-form-item ">
                             <div class="kit-pull-left kit-login-remember">
-                                <input type="checkbox" value="1" lay-skin="primary" title="记住帐号?" name="remember"
-                                       {notempty name="usermember" }checked="" {/notempty}>
+                                <input type="checkbox" value="1" lay-skin="primary" title="记住帐号?" name="remember" checked="" >
                             </div>
                             <div class="kit-pull-right">
                                 <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
@@ -81,40 +76,43 @@
         form.verify({
             username: [
                 /^[\w]{5,}$/
-                ,'用户名长度应该大于4位，且不能出现空格'
+                , '用户名长度应该大于4位，且不能出现空格'
             ]
-            ,password: [
+            , password: [
                 /^[\S]{6,16}$/
-                ,'密码必须6到16位，且不能出现空格'
+                , '密码必须6到16位，且不能出现空格'
             ]
-            ,captcha: [
+            , captcha: [
                 /^[\w]{4}$/
-                ,'验证码长度应该为4位'
+                , '验证码长度应该为4位'
             ]
         });
-        $(window).on('load', function () {
-            form.on('submit(login)', function (data) {
-                 $.ajax({
-                     url: "",
-                     data: $('#login').serialize(),
-                     type: 'post',
-                     async: false,
-                     success: function (res) {
-                         layer.msg(res.msg, {offset: '100px', anim: 4});
-                         if (res.code == 1) {
-                             setTimeout(function () {
-                                 location.href = res.url;
-                             }, 1500);
-                         } else {
-                             $('#captcha').click();
-                         }
-                     }
-                 });
-                return false;
+        form.on('submit(login)', function (data) {
+            console.log("do submit")
+            $.ajax({
+                url: "{:url('auth/index/login')}",
+                data: $('#login').serialize(),
+                type: 'post',
+                async: false,
+                success: function (res) {
+                    console.log(res);
+                    // layer.msg(res.msg, {offset: '100px', anim: 4});
+                    if (res.code == 1) {
+                        setTimeout(function () {
+                            location.href = res.url;
+                        }, 1500);
+                    } else {
+                        $('#captcha').click();
+                    }
+                },
+                error:function (res) {
+                    console.log(JSON.stringify(res));
+                }
             });
+            return false;
         });
-
     });
+
 </script>
 </body>
 

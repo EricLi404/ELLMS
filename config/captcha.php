@@ -4,7 +4,8 @@
  */
 return [
     // 验证码字符集合
-    'codeSet' => 'XQWERTYUPASFHJKVNM345679',
+    'codeSet' => '1',
+//    'codeSet' => 'XQWERTYUPASFHJKVNM345679',
     // 验证码字体大小(px)
     'fontSize' => 16,
     // 是否画混淆曲线

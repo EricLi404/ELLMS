@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use controller\BaseController;
 use think\captcha\Captcha;
 use think\Controller;
+use think\facade\Request;
 
 class IndexController extends BaseController
 {
@@ -24,7 +25,11 @@ class IndexController extends BaseController
     public function test()
     {
 //        echo $this->encryptionPassword('aaaaaa');
-        return $this->fetch();;
+        if(Request::isAjax()){
+            $res['lllll'] = "sfssfggg";
+            return $res;
+        }
+        return $this->fetch();
     }
 
 }

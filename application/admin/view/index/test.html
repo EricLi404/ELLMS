@@ -1,0 +1,18 @@
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $.ajax({
+        url:"{:url('/admin/index/test')}",
+        data:{
+            "dd":"dfssfg",
+            "dg":"d"
+        },
+        success:function (data) {
+            console.log(JSON.stringify(data));
+        },
+        error:function (data) {
+            console.log(JSON.stringify(data));
+        }
+    })
+
+</script>

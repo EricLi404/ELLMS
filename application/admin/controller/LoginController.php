@@ -8,6 +8,7 @@ namespace app\admin\controller;
 
 use app\admin\model\UserModel;
 use controller\BaseController;
+use service\LogService;
 use think\facade\Session;
 use think\facade\Url;
 
@@ -22,7 +23,7 @@ class LoginController extends BaseController
     {
         //request->action() 调用控制器类的操作
         if (session('user') && $this->request->action() !== 'out') {
-            $this->redirect('@admin');
+//            $this->redirect('@admin');
         }
     }
 
@@ -62,6 +63,7 @@ class LoginController extends BaseController
 //                                    写入session
                                     Session::set('user', $user);
 //                                    TODO 权限校验，写入log
+                                    LogService::write('登录','登录成功');
                                     $this->success('登录成功，正在进入系统...', '/');
                                 }
                             }

@@ -9,8 +9,8 @@ namespace app\admin\controller;
 use app\admin\model\UserModel;
 use controller\BaseController;
 use service\LogService;
+use think\facade\Request;
 use think\facade\Session;
-use think\facade\Url;
 
 class LoginController extends BaseController
 {
@@ -21,13 +21,20 @@ class LoginController extends BaseController
      */
     protected function initialize()
     {
-        //request->action() 调用控制器类的操作
-        if (session('user') && $this->request->action() !== 'out') {
-//            $this->redirect('@admin');
+//        如果session 中有用户信息，且请求的操作不是 'out' 则直接登录到首页
+        if (session('user') && Request::action() !== 'out') {
+            $this->redirect('@admin');
         }
     }
 
-
+    /**
+     * 登录 action
+     * @author: EricLi <leiflyy@outlook.com>
+     * @return int|mixed @GET 请求则渲染页面， @POST请求则执行登录操作
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function index()
     {
         if ($this->request->isGet()) {
@@ -78,4 +85,6 @@ class LoginController extends BaseController
 //            TODO  404
         return 0;
     }
+
+
 }

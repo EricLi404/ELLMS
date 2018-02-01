@@ -1,0 +1,8 @@
+.el-icon-right{
+    padding-right: 10px;
+    font-size: 15px;
+}
+.el-dd-left{
+    /*TODO 此举会导致左侧动画异常*/
+    padding-left: 50px;
+}

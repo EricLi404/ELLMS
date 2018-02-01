@@ -6,7 +6,53 @@
 {block name="side"}
     {include file="public/sider"/}
 {/block}
-{block name="body"}主体区域{/block}
+{block name="body"}
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+
+        <div class="layui-tab" lay-allowClose="true" lay-filter="demoo">
+            <ul class="layui-tab-title" id="tabHeader" >
+                <!--<li class="layui-this">网站设置</li>-->
+                <!--<li>订单管理</li>-->
+            </ul>
+            <div class="layui-tab-content" id="tabBody">
+                <!--<div class="layui-tab-item layui-show">1</div>-->
+                <!--<div class="layui-tab-item">2</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}
 {block name="footer"}
     {include file="public/footer"/}
+{/block}
+{block name="script"}
+<script>
+    //JavaScript代码区域
+    layui.use(['element','layer'], function(){
+        var element = layui.element;
+
+
+        element.tab({
+            headerElem: '#tabHeader>li' //指定tab头元素项
+            ,bodyElem: '#tabBody>.layui-tab-item' //指定tab主体元素项
+        });
+        var layer = layui.layer;
+
+        // 监听导航点击
+        element.on('nav(test)', function(data){
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+            element.tabAdd('demoo', {
+                title: '页面一'
+                ,content: "{:url('/admin/index/text')}" //支持传入html
+                ,id: 'ss'
+            });
+            layer.msg(data.text());
+        });
+    });
+</script>
 {/block}

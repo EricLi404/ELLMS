@@ -34,7 +34,6 @@
     layui.use(['element','layer'], function(){
         var element = layui.element;
 
-
         element.tab({
             headerElem: '#tabHeader>li' //指定tab头元素项
             ,bodyElem: '#tabBody>.layui-tab-item' //指定tab主体元素项
@@ -48,9 +47,10 @@
             console.log(data.elem); //得到当前的Tab大容器
             element.tabAdd('demoo', {
                 title: '页面一'
-                ,content: "{:url('/admin/index/text')}" //支持传入html
+                ,content: "{:url('/admin/index/test')}" //支持传入html
                 ,id: 'ss'
             });
+            // TODO 不显示页面内容
             layer.msg(data.text());
         });
     });
